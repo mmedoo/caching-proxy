@@ -3,6 +3,7 @@ const { clearCache } = require('./storage');
 
 if (argv.clearCache) {
 	clearCache();
+	console.log('Cache cleared.');
 	return;
 }
 

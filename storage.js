@@ -2,27 +2,37 @@ const axios = require('axios');
 
 let cache = {};
 
+let keyQueue = [];
+
+const cacheSize = 50;
+
+function cacheData(key, data) {
+	if (keyQueue.length >= cacheSize) {
+		delete cache[keyQueue[0]];
+		keyQueue.splice(0,1);
+	}
+	cache[key] = data;
+	keyQueue.push(key);
+}
+
 function clearCache() {
 	cache = {};
-	console.log('Cache cleared.');
 }
 
 function checkHit(cacheKey) {
-	if (cache[cacheKey]) {
-		console.log(`Cache hit for: ${cacheKey}`);
-		return cache[cacheKey];
-	}
-	return null;
+	return cache[cacheKey];
 }
 
 async function getAndCacheData(cacheKey, ORIGIN) {
 	try {
 		const response = await axios.get(`${ORIGIN}${cacheKey}`);
-		cache[cacheKey] = response.data; // Cache the response
+		cacheData(cacheKey, response.data)
 		return response.data;
 	} catch (error) {
 		throw error;
 	}
 }
+
+
 
 module.exports = { clearCache, checkHit, getAndCacheData };
