@@ -14,7 +14,6 @@
 	```bash
 	node index.js --clear-cache
 	```
-	**where `origin` is where missed requests will be forwarded.**
 
 
 - **Replace methods in `storage.js` file with your cache server configurations.**
