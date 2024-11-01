@@ -1,7 +1,20 @@
+# Intro
+
+### Caching Proxy CLI that uses LRU eviction.
+
 # Usage:
 
-- **Run the following command with these arguments to start listening:**
+- **Run the following command with the following arguments to start listening:**
 	```bash
 	node index.js --port 3000 --origin https://dummyjson.com
 	```
-### Replace methods in `storage.js` with your cache server configurations.
+	**where `origin` is where missed requests will be forwarded.**
+
+- **Run the following command to clear cache:**
+	```bash
+	node index.js --clear-cache
+	```
+	**where `origin` is where missed requests will be forwarded.**
+
+
+- **Replace methods in `storage.js` file with your cache server configurations.**
