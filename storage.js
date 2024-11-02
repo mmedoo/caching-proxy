@@ -7,12 +7,12 @@ let keyQueue = [];
 const cacheSize = 50;
 
 function cacheData(key, data) {
-	if (keyQueue.length >= cacheSize) {
+	cache[key] = data;
+	keyQueue.push(key);
+	if (keyQueue.length > cacheSize) {
 		delete cache[keyQueue[0]];
 		keyQueue.splice(0,1);
 	}
-	cache[key] = data;
-	keyQueue.push(key);
 }
 
 function clearCache() {

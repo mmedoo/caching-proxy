@@ -1,4 +1,4 @@
-const argv = require('./args.js');
+const argv = require('./args');
 const { clearCache } = require('./storage');
 
 if (argv.clearCache) {
@@ -7,7 +7,9 @@ if (argv.clearCache) {
 	return;
 }
 
-if (!argv.port || !argv.origin) {
+const { port, origin } = argv;
+
+if (!port || !origin) {
 	console.error('Please provide both --port and --origin arguments.');
 	return;
 }
@@ -16,8 +18,6 @@ const express = require('express');
 const handleRequest = require('./handleRequest');
 
 const app = express();
-
-const { port, origin } = argv;
 
 app.use(handleRequest);
 
